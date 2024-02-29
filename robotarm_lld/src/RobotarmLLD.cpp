@@ -4,9 +4,12 @@
 
 #include "robotarm_lld/RobotarmLLD.hpp"
 
-RobotarmLLD::RobotarmLLD(std::string port_name) : serial(ioservice, port_name), os(&string_stream_buffer)
+#include <boost/asio.hpp>
+
+RobotarmLLD::RobotarmLLD(const std::string& port_name) : serial(ioservice, port_name), os(&string_stream_buffer)
 {
 	setup_robotarm();
+	write_to_serial("test");
 }
 
 void RobotarmLLD::setup_robotarm()
@@ -22,4 +25,11 @@ void RobotarmLLD::write_to_serial(std::string command)
 {
 	os << command;
 	boost::asio::write(serial, string_stream_buffer);
+}
+
+std::string RobotarmLLD::input_to_command(uint16_t servo_id, int16_t angle, uint16_t time)
+{
+	std::stringstream ss;
+	// ss << '#' << servo_id << 'P' << map_values(servo_id, angle) << 'T' << time << '\r';
+	return ss.str();
 }

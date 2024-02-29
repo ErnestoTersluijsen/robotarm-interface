@@ -4,7 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "/opt/ros/humble/include/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/robotarm_lld/**",
+                "${workspaceFolder}/robotarm_hld/**",
+                "${workspaceFolder}/build/robotarm_hld/rosidl_generator_cpp"
             ],
             "defines": [],
             "cStandard": "c17",

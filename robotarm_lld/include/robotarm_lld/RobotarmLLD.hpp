@@ -13,15 +13,17 @@
 class RobotarmLLD
 {
   public:
-	RobotarmLLD(std::string port_name);
+	RobotarmLLD(const std::string& port_name);
 
 	void write_to_serial(std::string command);
 
   private:
 	void setup_robotarm();
 
-	boost::asio::serial_port serial;
+	std::string RobotarmLLD::input_to_command(uint16_t servo_id, int16_t angle, uint16_t time);
+
 	boost::asio::io_service ioservice;
+	boost::asio::serial_port serial;
 	boost::asio::streambuf string_stream_buffer;
 	std::ostream os;
 };
