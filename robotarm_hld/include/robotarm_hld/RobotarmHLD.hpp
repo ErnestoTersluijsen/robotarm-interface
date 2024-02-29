@@ -12,6 +12,8 @@ class RobotarmHLD
   public:
 	RobotarmHLD(const std::string& port_name);
 
+	void move_servos(std::vector<uint16_t> servo_ids, std::vector<int16_t> joint_angles, uint16_t speed);
+
   private:
 	RobotarmLLD lld;
 };

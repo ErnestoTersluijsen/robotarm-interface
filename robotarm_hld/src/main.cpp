@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-int main(int argc, char** argv)
+int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
 	std::cout << "main" << std::endl;
 	rclcpp::init(argc, argv);
