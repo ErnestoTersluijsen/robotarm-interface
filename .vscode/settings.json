@@ -1,3 +1,7 @@
 {
-	"editor.defaultFormatter": "xaver.clang-format"
+	"editor.defaultFormatter": "xaver.clang-format",
+	"C_Cpp.default.compilerPath": "/usr/bin/g++",
+	"files.associations": {
+		"string": "cpp"
+	}
 }
