@@ -1,5 +1,5 @@
-uint16[] servoids
-int16[] angles
+uint16[] servo_ids
+int16[] joint_angles
 uint16 speed
 ---
 string response

@@ -14,7 +14,7 @@ RosInterface::RosInterface(const std::string& port_name) : Node("interface"), hl
 
 rclcpp_action::GoalResponse RosInterface::handle_servo_goal([[maybe_unused]] const rclcpp_action::GoalUUID& uuid, std::shared_ptr<const robotarm_hld::action::ServoPositions::Goal> goal)
 {
-	if (goal->servoids.size() == 0 || goal->servoids.size() != goal->angles.size())
+	if (goal->servo_ids.size() == 0 || goal->servo_ids.size() != goal->joint_angles.size())
 	{
 		return rclcpp_action::GoalResponse::REJECT;
 	}
@@ -35,16 +35,16 @@ void RosInterface::servo_execute(const std::shared_ptr<rclcpp_action::ServerGoal
 {
 	auto goal = goal_handle->get_goal();
 
-	std::cout << "servo ID:";
-	for (auto servoid : goal->servoids)
+	std::cout << "servo IDs:";
+	for (auto servo_id : goal->servo_ids)
 	{
-		std::cout << " " << servoid;
+		std::cout << " " << servo_id;
 	}
 	std::cout << std::endl;
 
 
 	std::cout << "angles:";
-	for (auto angle : goal->angles)
+	for (auto angle : goal->joint_angles)
 	{
 		std::cout << " " << angle;
 	}
