@@ -10,25 +10,47 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(robotarm_lld REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-add_executable(${PROJECT_NAME}
+# set message files
+set(action_files
+  "action/PositionPreset.action"
+  "action/Servo.action"
+)
+
+# generate message files
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${action_files}
+)
+
+ament_export_dependencies(rosidl_default_runtime)
+
+add_executable(robotarm_interface
 	src/main.cpp
 	src/RosInterface.cpp
 	src/Position.cpp
 	src/RobotarmHLD.cpp
-	# src/RobotarmLLD.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(robotarm_interface PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	$<INSTALL_INTERFACE:include>
 )
 
-ament_target_dependencies(${PROJECT_NAME}
+ament_target_dependencies(robotarm_interface
 	rclcpp
 	rclcpp_action
 	robotarm_lld
 )
+
+# install application
+install(TARGETS robotarm_interface
+	DESTINATION lib/${PROJECT_NAME}
+)
+
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} rosidl_typesupport_cpp)
+
+target_link_libraries(robotarm_interface "${cpp_typesupport_target}")
 
 if(BUILD_TESTING)
 	find_package(ament_lint_auto REQUIRED)
