@@ -9,7 +9,7 @@
 RobotarmLLD::RobotarmLLD(const std::string& port_name) : serial(ioservice, port_name), os(&string_stream_buffer)
 {
 	setup_robotarm();
-	write_to_serial("test");
+	write_to_serial("test\r\n");
 }
 
 void RobotarmLLD::setup_robotarm()

@@ -15,7 +15,7 @@ find_package(rosidl_default_generators REQUIRED)
 # set message files
 set(action_files
   "action/PositionPreset.action"
-  "action/Servo.action"
+  "action/ServoPositions.action"
 )
 
 # generate message files
