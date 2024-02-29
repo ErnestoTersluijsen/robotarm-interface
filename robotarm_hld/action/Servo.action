@@ -1,6 +1,6 @@
-uint16[] servoid
-int16[] angle
-uint16 time
+uint16[] servoids
+int16[] angles
+uint16 speed
 ---
 string response
 ---

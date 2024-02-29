@@ -20,7 +20,7 @@ class RobotarmLLD
   private:
 	void setup_robotarm();
 
-	std::string RobotarmLLD::input_to_command(uint16_t servo_id, int16_t angle, uint16_t time);
+	std::string input_to_command(uint16_t servo_id, int16_t angle, uint16_t time);
 
 	boost::asio::io_service ioservice;
 	boost::asio::serial_port serial;
