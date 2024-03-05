@@ -13,14 +13,15 @@ find_package(robotarm_lld REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 # set message files
-set(action_files
+set(message_files
   "action/PositionPreset.action"
   "action/ServoPositions.action"
+  "srv/EmergencyStop.srv"
 )
 
 # generate message files
 rosidl_generate_interfaces(${PROJECT_NAME}
-  ${action_files}
+  ${message_files}
 )
 
 ament_export_dependencies(rosidl_default_runtime)

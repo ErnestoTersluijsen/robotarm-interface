@@ -3,4 +3,4 @@ uint16 speed
 ---
 string response
 ---
-int16 progress
+uint16 progress

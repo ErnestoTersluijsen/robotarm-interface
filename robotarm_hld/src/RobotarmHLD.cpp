@@ -9,9 +9,9 @@
 RobotarmHLD::RobotarmHLD(const std::string& port_name) : lld(port_name)
 {
 	std::cout << "RobotarmHLD" << std::endl;
-	presets.push_back(Position({0, 60, 108, 45, 0, 0}));
-	presets.push_back(Position({0, 48, 74, 10, 0, 0}));
-	presets.push_back(Position({0, 30, 14, 0, 0, 0}));
+	presets.push_back(Position({0, 60, 108, 45, 0, 0}));	// PARK
+	presets.push_back(Position({0, 48, 74, 10, 0, 0}));		// READY
+	presets.push_back(Position({0, 30, 14, 0, 0, 0}));		// STRAIGHT UP
 
 }
 
