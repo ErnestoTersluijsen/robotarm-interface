@@ -1,14 +1,18 @@
 #include "robotarm_hld/Position.hpp"
 
-Position::Position(uint16_t servo_base_angle, uint16_t servo_shoulder_angle, uint16_t servo_elbow_angle, uint16_t servo_wrist_angle, uint16_t servo_gripper_angle, uint16_t servo_wrist_rotate)
+Position::Position(std::vector<int16_t> angles) : servo_angles(angles)
 {
-	servo_angles = {servo_base_angle, servo_shoulder_angle, servo_elbow_angle, servo_wrist_angle, servo_gripper_angle, servo_wrist_rotate};
 }
 
-// void Position::commands_to_serial(LowLevelDriver& lld, uint16_t time)
+// std::string Position::commands_to_serial(uint16_t time)
 // {
 // 	for (uint16_t i = 1; i < servo_angles.size(); ++i)
 // 	{
 // 		lld.write_to_serial(lld.input_to_command(i, servo_angles.at(i), time));
 // 	}
 // }
+
+std::vector<int16_t> Position::get_servo_angles() const
+{
+	return servo_angles;
+}

@@ -5,6 +5,7 @@
 #ifndef ROBOTARM_HLD_ROBOTARMHLD_HPP
 #define ROBOTARM_HLD_ROBOTARMHLD_HPP
 
+#include "robotarm_hld/Position.hpp"
 #include "robotarm_lld/RobotarmLLD.hpp"
 
 class RobotarmHLD
@@ -14,8 +15,14 @@ class RobotarmHLD
 
 	void move_servos(std::vector<uint16_t> servo_ids, std::vector<int16_t> joint_angles, uint16_t speed);
 
+	void move_to_preset(int preset, uint16_t speed);
+
+	void emergency_stop();
+
   private:
 	RobotarmLLD lld;
+
+	std::vector<Position> presets;
 };
 
 #endif // ROBOTARM_HLD_ROBOTARMHLD_HPP

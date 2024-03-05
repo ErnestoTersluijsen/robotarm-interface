@@ -37,25 +37,27 @@ void RosInterface::servo_execute(const std::shared_ptr<rclcpp_action::ServerGoal
 
 	// ====== INPUT PRINTING ======
 
-	std::cout << "servo IDs:";
-	for (auto servo_id : goal->servo_ids)
-	{
-		std::cout << " " << servo_id;
-	}
-	std::cout << std::endl;
+	// hld.move_servos(goal->servo_ids, goal->joint_angles, goal->speed);
 
-	std::cout << "angles:";
-	for (auto angle : goal->joint_angles)
-	{
-		std::cout << " " << angle;
-	}
-	std::cout << std::endl;
+	hld.move_to_preset(PARK, 500);
 
-	std::cout << "speed: " << goal->speed << std::endl;
+	// std::cout << "servo IDs:";
+	// for (auto servo_id : goal->servo_ids)
+	// {
+	// 	std::cout << " " << servo_id;
+	// }
+	// std::cout << std::endl;
+
+	// std::cout << "angles:";
+	// for (auto angle : goal->joint_angles)
+	// {
+	// 	std::cout << " " << angle;
+	// }
+	// std::cout << std::endl;
+
+	// std::cout << "speed: " << goal->speed << std::endl;
 
 	// ============================
-
-	hld.move_servos(goal->servo_ids, goal->joint_angles, goal->speed);
 
 	auto result = std::make_shared<robotarm_hld::action::ServoPositions::Result>();
 	result->response = "succeeded";
