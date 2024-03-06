@@ -53,7 +53,7 @@ void RosInterface::servo_execute(const std::shared_ptr<rclcpp_action::ServerGoal
 
 rclcpp_action::GoalResponse RosInterface::handle_position_preset_goal([[maybe_unused]] const rclcpp_action::GoalUUID& uuid, std::shared_ptr<const robotarm_hld::action::PositionPreset::Goal> goal)
 {
-	if (emergency_stop) // TODO: ADD CHECK FOR VALID POSITION (amount_of_presets < goal->position)
+	if (emergency_stop || goal->position >= hld.get_amount_of_presets()) // TODO: ADD CHECK FOR VALID POSITION (amount_of_presets < goal->position)
 	{
 		return rclcpp_action::GoalResponse::REJECT;
 	}

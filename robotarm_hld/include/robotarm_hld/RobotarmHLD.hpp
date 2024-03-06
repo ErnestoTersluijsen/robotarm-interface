@@ -19,6 +19,8 @@ class RobotarmHLD
 
 	void emergency_stop();
 
+	long get_amount_of_presets() const;
+
   private:
 	RobotarmLLD lld;
 

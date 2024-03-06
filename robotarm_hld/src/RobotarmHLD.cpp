@@ -40,3 +40,8 @@ void RobotarmHLD::emergency_stop()
 {
 	lld.emergency_stop();
 }
+
+long RobotarmHLD::get_amount_of_presets() const
+{
+	return presets.size();
+}
