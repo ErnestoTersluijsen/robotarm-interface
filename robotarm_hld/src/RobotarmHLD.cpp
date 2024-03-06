@@ -20,7 +20,7 @@ void RobotarmHLD::move_servos(std::vector<uint16_t> servo_ids, std::vector<int16
 	}
 }
 
-void RobotarmHLD::move_to_preset(int preset, uint16_t speed)
+void RobotarmHLD::move_to_preset(uint16_t preset, uint16_t speed)
 {
 	std::vector<uint16_t> servo_ids;
 	std::vector<int16_t> preset_angle = preset_config::presets.at(preset).get_servo_angles();
@@ -45,5 +45,5 @@ long RobotarmHLD::get_amount_of_presets() const
 
 void RobotarmHLD::initialise_robotarm()
 {
-	move_to_preset(PARK, 0);
+	move_to_preset(PARK, 2200);
 }

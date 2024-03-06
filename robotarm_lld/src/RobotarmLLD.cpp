@@ -44,7 +44,7 @@ std::string RobotarmLLD::input_to_command(uint16_t servo_id, int16_t angle, uint
 
 void RobotarmLLD::emergency_stop()
 {
-	for (int i = 0; i < amount_of_channels; ++i)
+	for (size_t i = 0; i < amount_of_channels; ++i)
 	{
 		std::stringstream ss;
 		ss << "STOP " << i << "\r";

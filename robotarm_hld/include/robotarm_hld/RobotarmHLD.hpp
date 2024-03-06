@@ -15,7 +15,7 @@ class RobotarmHLD
 
 	void move_servos(std::vector<uint16_t> servo_ids, std::vector<int16_t> joint_angles, uint16_t speed);
 
-	void move_to_preset(int preset, uint16_t speed);
+	void move_to_preset(uint16_t preset, uint16_t speed);
 
 	void emergency_stop();
 

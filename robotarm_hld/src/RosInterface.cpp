@@ -41,12 +41,42 @@ void RosInterface::handle_servo_accepted(const std::shared_ptr<rclcpp_action::Se
 void RosInterface::servo_execute(const std::shared_ptr<rclcpp_action::ServerGoalHandle<robotarm_hld::action::ServoPositions>> goal_handle)
 {
 	auto goal = goal_handle->get_goal();
+	auto feedback = std::make_shared<robotarm_hld::action::ServoPositions::Feedback>();
+	auto result = std::make_shared<robotarm_hld::action::ServoPositions::Result>();
 
 	hld.move_servos(goal->servo_ids, goal->joint_angles, goal->speed);
 
-	auto result = std::make_shared<robotarm_hld::action::ServoPositions::Result>();
-	result->response = "succeeded";
-	goal_handle->succeed(result);
+	auto start_time = std::chrono::high_resolution_clock::now();
+
+	while (rclcpp::ok())
+	{
+		if (goal_handle->is_canceling())
+		{
+			result->response = "cancelled";
+			goal_handle->succeed(result);
+			return;
+		}
+
+		if (emergency_stop)
+		{
+			result->response = "emergency stop";
+			goal_handle->succeed(result);
+			return;
+		}
+
+		auto current_time = std::chrono::high_resolution_clock::now();
+		auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - start_time).count();
+
+		feedback->progress = static_cast<uint16_t>((static_cast<double>(elapsed_time) / static_cast<double>(goal->speed)) * 100);
+		goal_handle->publish_feedback(feedback);
+
+		if (elapsed_time >= goal->speed)
+		{
+			result->response = "succeeded";
+			goal_handle->succeed(result);
+			return;
+		}
+	}
 }
 
 // ================================================================================================
@@ -72,17 +102,44 @@ void RosInterface::handle_position_preset_accepted(const std::shared_ptr<rclcpp_
 
 void RosInterface::position_preset_execute(const std::shared_ptr<rclcpp_action::ServerGoalHandle<robotarm_hld::action::PositionPreset>> goal_handle)
 {
+	auto feedback = std::make_shared<robotarm_hld::action::PositionPreset::Feedback>();
+	auto result = std::make_shared<robotarm_hld::action::PositionPreset::Result>();
+
 	auto goal = goal_handle->get_goal();
 
 	hld.move_to_preset(goal->position, goal->speed);
 
-	// auto feedback = std::make_shared<robotarm_hld::action::PositionPreset::Feedback>();
-	// feedback->progress = 50;
-	// goal_handle->publish_feedback(feedback);
+	auto start_time = std::chrono::high_resolution_clock::now();
 
-	auto result = std::make_shared<robotarm_hld::action::PositionPreset::Result>();
-	result->response = "succeeded";
-	goal_handle->succeed(result);
+	while (rclcpp::ok())
+	{
+		if (goal_handle->is_canceling())
+		{
+			result->response = "cancelled";
+			goal_handle->succeed(result);
+			return;
+		}
+
+		if (emergency_stop)
+		{
+			result->response = "emergency stop";
+			goal_handle->succeed(result);
+			return;
+		}
+
+		auto current_time = std::chrono::high_resolution_clock::now();
+		auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - start_time).count();
+
+		feedback->progress = static_cast<uint16_t>((static_cast<double>(elapsed_time) / static_cast<double>(goal->speed)) * 100);
+		goal_handle->publish_feedback(feedback);
+
+		if (elapsed_time >= goal->speed)
+		{
+			result->response = "succeeded";
+			goal_handle->succeed(result);
+			return;
+		}
+	}
 }
 
 // ================================================================================================
