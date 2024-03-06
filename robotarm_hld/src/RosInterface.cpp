@@ -8,8 +8,6 @@
 
 RosInterface::RosInterface(const std::string& port_name) : Node("interface"), hld(port_name), emergency_stop(false)
 {
-	std::cout << "RosInterface" << std::endl;
-
 	servo_position_server = rclcpp_action::create_server<robotarm_hld::action::ServoPositions>(this, "servo", std::bind(&RosInterface::handle_servo_goal, this, std::placeholders::_1, std::placeholders::_2), std::bind(&RosInterface::handle_servo_cancel, this, std::placeholders::_1), std::bind(&RosInterface::handle_servo_accepted, this, std::placeholders::_1));
 
 	position_preset_server = rclcpp_action::create_server<robotarm_hld::action::PositionPreset>(this, "position_preset", std::bind(&RosInterface::handle_position_preset_goal, this, std::placeholders::_1, std::placeholders::_2), std::bind(&RosInterface::handle_position_preset_cancel, this, std::placeholders::_1), std::bind(&RosInterface::handle_position_preset_accepted, this, std::placeholders::_1));

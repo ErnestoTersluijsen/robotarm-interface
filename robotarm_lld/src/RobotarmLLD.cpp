@@ -11,8 +11,6 @@
 RobotarmLLD::RobotarmLLD(const std::string& port_name) : serial(ioservice, port_name), os(&string_stream_buffer), amount_of_channels(6)
 {
 	setup_robotarm();
-	write_to_serial("test\r\n");
-	write_to_serial("test\r\n");
 }
 
 RobotarmLLD::~RobotarmLLD()
