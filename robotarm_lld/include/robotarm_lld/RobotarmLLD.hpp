@@ -26,6 +26,10 @@ class RobotarmLLD
   private:
 	void setup_robotarm();
 
+	long map(long x, long in_min, long in_max, long out_min, long out_max);
+
+	long limit_angles(uint16_t id, int16_t angle);
+
 	boost::asio::io_service ioservice;
 	boost::asio::serial_port serial;
 	boost::asio::streambuf string_stream_buffer;

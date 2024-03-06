@@ -4,6 +4,8 @@
 
 #include "robotarm_lld/RobotarmLLD.hpp"
 
+#include "robotarm_lld/config.hpp"
+
 #include <boost/asio.hpp>
 
 RobotarmLLD::RobotarmLLD(const std::string& port_name) : serial(ioservice, port_name), os(&string_stream_buffer), amount_of_channels(6)
@@ -48,4 +50,21 @@ void RobotarmLLD::emergency_stop()
 		ss << "STOP " << i << "\r";
 		write_to_serial(ss.str());
 	}
+}
+
+// void RobotarmLLD::map_values()
+// {
+// }
+
+long RobotarmLLD::limit_angles(uint16_t id, int16_t angle)
+{
+	if(config::servo_limits.at(id).first > angle)
+	{
+
+	}
+}
+
+long RobotarmLLD::map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
