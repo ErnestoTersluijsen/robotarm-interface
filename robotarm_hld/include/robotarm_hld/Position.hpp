@@ -5,14 +5,6 @@
 
 #include <vector>
 
-enum Positions
-{
-	PARK = 0,
-	READY = 1,
-	STRAIGHT = 2,
-	// EMERGENCY_STOP = 3
-};
-
 class Position
 {
   public:

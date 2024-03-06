@@ -24,7 +24,7 @@ class RobotarmHLD
   private:
 	RobotarmLLD lld;
 
-	std::vector<Position> presets;
+	// std::vector<Position> presets;
 };
 
 #endif // ROBOTARM_HLD_ROBOTARMHLD_HPP
