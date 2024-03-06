@@ -9,6 +9,7 @@
 
 RobotarmHLD::RobotarmHLD(const std::string& port_name) : lld(port_name)
 {
+	initialise_robotarm();
 }
 
 void RobotarmHLD::move_servos(std::vector<uint16_t> servo_ids, std::vector<int16_t> joint_angles, uint16_t speed)
@@ -40,4 +41,9 @@ void RobotarmHLD::emergency_stop()
 long RobotarmHLD::get_amount_of_presets() const
 {
 	return preset_config::presets.size();
+}
+
+void RobotarmHLD::initialise_robotarm()
+{
+	move_to_preset(PARK, 0);
 }

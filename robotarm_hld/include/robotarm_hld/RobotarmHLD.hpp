@@ -22,9 +22,9 @@ class RobotarmHLD
 	long get_amount_of_presets() const;
 
   private:
-	RobotarmLLD lld;
+  	void initialise_robotarm();
 
-	// std::vector<Position> presets;
+	RobotarmLLD lld;
 };
 
 #endif // ROBOTARM_HLD_ROBOTARMHLD_HPP
