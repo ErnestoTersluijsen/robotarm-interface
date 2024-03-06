@@ -7,6 +7,10 @@
 
 #include <vector>
 
+/**
+ * @brief Enum for the different preset positions
+ * 
+ */
 enum presetPosition
 {
 	PARK = 0,
@@ -16,6 +20,10 @@ enum presetPosition
 
 namespace preset_config
 {
+	/**
+	 * @brief Vector containing the different presets for the robotarm
+	 * 
+	 */
 	std::vector<Position> presets =
 	{
 		Position({0, 60, 108, 45, 0, 0}),

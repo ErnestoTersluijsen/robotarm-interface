@@ -7,6 +7,10 @@
 
 namespace config
 {
+	/**
+	 * @brief Vector for keeping track of the turning limits imposed on the servo's
+	 * 
+	 */
 	std::vector<std::pair<int16_t, int16_t>> servo_limits =
 		{
 			{-90, 90},
