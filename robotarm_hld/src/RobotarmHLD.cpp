@@ -5,14 +5,11 @@
 #include "robotarm_hld/RobotarmHLD.hpp"
 
 #include "robotarm_hld/Position.hpp"
+#include "robotarm_hld/PresetConfig.hpp"
 
 RobotarmHLD::RobotarmHLD(const std::string& port_name) : lld(port_name)
 {
-	std::cout << "RobotarmHLD" << std::endl;
-	presets.push_back(Position({0, 60, 108, 45, 0, 0}));	// PARK
-	presets.push_back(Position({0, 48, 74, 10, 0, 0}));		// READY
-	presets.push_back(Position({0, 30, 14, 0, 0, 0}));		// STRAIGHT UP
-
+	initialise_robotarm();
 }
 
 void RobotarmHLD::move_servos(std::vector<uint16_t> servo_ids, std::vector<int16_t> joint_angles, uint16_t speed)
@@ -23,10 +20,10 @@ void RobotarmHLD::move_servos(std::vector<uint16_t> servo_ids, std::vector<int16
 	}
 }
 
-void RobotarmHLD::move_to_preset(int preset, uint16_t speed)
+void RobotarmHLD::move_to_preset(uint16_t preset, uint16_t speed)
 {
 	std::vector<uint16_t> servo_ids;
-	std::vector<int16_t> preset_angle = presets.at(preset).get_servo_angles();
+	std::vector<int16_t> preset_angle = preset_config::presets.at(preset).get_servo_angles();
 
 	for (size_t i = 0; i < preset_angle.size(); ++i)
 	{
@@ -39,4 +36,14 @@ void RobotarmHLD::move_to_preset(int preset, uint16_t speed)
 void RobotarmHLD::emergency_stop()
 {
 	lld.emergency_stop();
+}
+
+long RobotarmHLD::get_amount_of_presets() const
+{
+	return preset_config::presets.size();
+}
+
+void RobotarmHLD::initialise_robotarm()
+{
+	move_to_preset(PARK, 2200);
 }

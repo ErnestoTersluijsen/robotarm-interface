@@ -16,5 +16,5 @@ Example servo positions command:
 - positie presets terug toevoegen/compatable maken
 - noodstop toegoeven
 - state logging
-- diagrammen
+- diagrammen (Klasse Diagram, timing diagrammen, state diagram, sequence diagram, protocol state diagram, usecase diagram)
 - 

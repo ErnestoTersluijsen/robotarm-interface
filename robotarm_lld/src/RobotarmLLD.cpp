@@ -11,8 +11,6 @@
 RobotarmLLD::RobotarmLLD(const std::string& port_name) : serial(ioservice, port_name), os(&string_stream_buffer), amount_of_channels(6)
 {
 	setup_robotarm();
-	write_to_serial("test\r\n");
-	write_to_serial("test\r\n");
 }
 
 RobotarmLLD::~RobotarmLLD()
@@ -38,13 +36,13 @@ void RobotarmLLD::write_to_serial(std::string command)
 std::string RobotarmLLD::input_to_command(uint16_t servo_id, int16_t angle, uint16_t time)
 {
 	std::stringstream ss;
-	ss << '#' << servo_id << 'P' << angle << 'T' << time << '\r' << '\n'; // TODO: CONVERT ANGLE TO PWM AND HANDLE ANGLE TOO GREAT AND MAYBE REMOVE '\n'
+	ss << '#' << servo_id << 'P' << angle_to_pwm(servo_id, angle) << 'T' << time << '\r' << '\n';
 	return ss.str();
 }
 
 void RobotarmLLD::emergency_stop()
 {
-	for (int i = 0; i < amount_of_channels; ++i)
+	for (size_t i = 0; i < amount_of_channels; ++i)
 	{
 		std::stringstream ss;
 		ss << "STOP " << i << "\r";
@@ -52,15 +50,42 @@ void RobotarmLLD::emergency_stop()
 	}
 }
 
-// void RobotarmLLD::map_values()
-// {
-// }
+long RobotarmLLD::angle_to_pwm(uint16_t id, int16_t angle)
+{
+	return map(limit_angles(id, angle), config::servo_limits.at(id).first, config::servo_limits.at(id).second, 500, 2500);
+}
 
 long RobotarmLLD::limit_angles(uint16_t id, int16_t angle)
 {
-	if(config::servo_limits.at(id).first > angle)
+	if (id == 3)
 	{
-
+		if (config::servo_limits.at(id).first < angle)
+		{
+			return config::servo_limits.at(id).first;
+		}
+		else if (config::servo_limits.at(id).second > angle)
+		{
+			return config::servo_limits.at(id).second;
+		}
+		else
+		{
+			return angle;
+		}
+	}
+	else
+	{
+		if (config::servo_limits.at(id).first > angle)
+		{
+			return config::servo_limits.at(id).first;
+		}
+		else if (config::servo_limits.at(id).second < angle)
+		{
+			return config::servo_limits.at(id).second;
+		}
+		else
+		{
+			return angle;
+		}
 	}
 }
 
