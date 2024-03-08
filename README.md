@@ -38,7 +38,3 @@ Voorbeeld emergency stop command:
 ## Todo list:
 - event logging
 - diagrammen checken (Klasse Diagram, timing diagrammen, state diagram, sequence diagram, protocol state diagram, usecase diagram)
-
-
-vragen:
-i.p.v "move", "moving"
