@@ -42,7 +42,7 @@ void RosInterface::handle_servo_accepted(const std::shared_ptr<rclcpp_action::Se
 
 void RosInterface::servo_execute(const std::shared_ptr<rclcpp_action::ServerGoalHandle<robotarm_hld::action::ServoPositions>> goal_handle)
 {
-	print_state_info("Move");
+	print_state_info("Moving");
 
 	auto goal = goal_handle->get_goal();
 	auto feedback = std::make_shared<robotarm_hld::action::ServoPositions::Feedback>();
@@ -110,7 +110,7 @@ void RosInterface::handle_position_preset_accepted(const std::shared_ptr<rclcpp_
 
 void RosInterface::position_preset_execute(const std::shared_ptr<rclcpp_action::ServerGoalHandle<robotarm_hld::action::PositionPreset>> goal_handle)
 {
-	print_state_info("Move");
+	print_state_info("Moving");
 
 	auto feedback = std::make_shared<robotarm_hld::action::PositionPreset::Feedback>();
 	auto result = std::make_shared<robotarm_hld::action::PositionPreset::Result>();
