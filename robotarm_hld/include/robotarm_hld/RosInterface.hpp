@@ -79,6 +79,20 @@ class RosInterface : public rclcpp::Node
 	void handle_emergency_stop_request(const std::shared_ptr<robotarm_hld::srv::EmergencyStop::Request> request, std::shared_ptr<robotarm_hld::srv::EmergencyStop::Response> response);
 
 	/**
+	 * @brief Function for printing the current state to ROS INFO
+	 *
+	 * @param state Current state
+	 */
+	void print_state_info(std::string state);
+
+	/**
+	 * @brief Function for printing the current event to ROS DEBUG
+	 *
+	 * @param event Current event
+	 */
+	void print_event_info(std::string event);
+
+	/**
 	 * @brief Servo position server object.
 	 *
 	 */
@@ -92,19 +106,19 @@ class RosInterface : public rclcpp::Node
 
 	/**
 	 * @brief Emergency stop service
-	 * 
+	 *
 	 */
 	rclcpp::Service<robotarm_hld::srv::EmergencyStop>::SharedPtr emergency_stop_service;
 
 	/**
 	 * @brief High Level Driver object
-	 * 
+	 *
 	 */
 	RobotarmHLD hld;
 
 	/**
 	 * @brief Boolean that is true when emergency stop has been triggered
-	 * 
+	 *
 	 */
 	bool emergency_stop;
 };

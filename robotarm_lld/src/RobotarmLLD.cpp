@@ -45,7 +45,7 @@ void RobotarmLLD::emergency_stop()
 	for (size_t i = 0; i < amount_of_channels; ++i)
 	{
 		std::stringstream ss;
-		ss << "STOP " << i << "\r";
+		ss << "STOP " << i << '\r' << '\n';
 		write_to_serial(ss.str());
 	}
 }

@@ -4,9 +4,13 @@
 ### Compileren
  Om het programma te compileren draai `colcon build` in de huidige folder. 
 
- Om de opdracht op te starten gebruik de volgende commands:
+ Om de opdracht op te starten gebruik de volgende commando's:
  - `. install/setup.sh`
  - `ros2 run robotarm_hld robotarm_interface`
+
+ Om debug logging te zien gebruik de volgende commando's:
+ - `. install/setup.sh`
+- `ros2 run robotarm_hld robotarm_interface --ros-args --log-level debug`
 
 ### Virtuele port
 Dit zij de commando's om een virtuele serial port te openen
@@ -32,5 +36,9 @@ Voorbeeld emergency stop command:
 
 
 ## Todo list:
-- state logging
-- diagrammen (Klasse Diagram, timing diagrammen, state diagram, sequence diagram, protocol state diagram, usecase diagram)
+- event logging
+- diagrammen checken (Klasse Diagram, timing diagrammen, state diagram, sequence diagram, protocol state diagram, usecase diagram)
+
+
+vragen:
+i.p.v "move", "moving"
