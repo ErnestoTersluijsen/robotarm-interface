@@ -15,19 +15,22 @@ Dit zij de commando's om een virtuele serial port te openen
 
 `cat /dev/pts/...`
 
-### Mogelijke commando's
+### Mogelijke commando's:
 Voorbeeld servo positions command:
-- `ros2 action send_goal /servo robotarm_hld/action/ServoPositions "{servo_ids: [1, 2, 3], joint_angles: [60, 45, -30], speed: 2300}" --feedback`
+
+`ros2 action send_goal /servo robotarm_hld/action/ServoPositions "{servo_ids: [1, 2, 3], joint_angles: [60, 45, -30], speed: 2300}" --feedback`
+
 
 Voorbeeld preset position command:
-- `ros2 action send_goal /position_preset robotarm_hld/action/PositionPreset "{position: 0, speed: 2300}" --feedback`
+
+`ros2 action send_goal /position_preset robotarm_hld/action/PositionPreset "{position: 0, speed: 2300}" --feedback`
 
 Voorbeeld emergency stop command:
-- `ros2 service call /emergency_stop robotarm_hld/srv/EmergencyStop`
+
+`ros2 service call /emergency_stop robotarm_hld/srv/EmergencyStop`
 
 
 
 ## Todo list:
 - state logging
 - diagrammen (Klasse Diagram, timing diagrammen, state diagram, sequence diagram, protocol state diagram, usecase diagram)
-- 
