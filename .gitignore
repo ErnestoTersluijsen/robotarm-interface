@@ -3,5 +3,3 @@ build/*
 log/*
 install/*
 *.lock
-*.odt#
-
